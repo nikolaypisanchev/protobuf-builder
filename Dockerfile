@@ -19,5 +19,5 @@ COPY --from=builder /go/bin/protoc-gen-go /usr/local/bin/
 RUN go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
 RUN go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
 
-ENTRYPOINT ["/usr/local/bin/protoc", "-I/usr/local/include"]
+ENTRYPOINT ["/usr/local/bin/protoc", "-I/usr/local/include", "-I/go/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis"]
 CMD []
