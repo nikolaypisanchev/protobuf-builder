@@ -13,9 +13,11 @@ RUN apt-get update && apt-get install -y curl unzip && \
 
 FROM ${BASE_IMAGE}
 
-COPY --from=builder /pb/include/* /usr/local/include
+COPY --from=builder /pb/include/* /usr/local/include/google
 COPY --from=builder /pb/bin/protoc /usr/local/bin/
 COPY --from=builder /go/bin/protoc-gen-go /usr/local/bin/
+RUN go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
+RUN go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
 
 ENTRYPOINT ["/usr/local/bin/protoc", "-I/usr/local/include"]
 CMD []
