@@ -18,6 +18,7 @@ COPY --from=builder /pb/bin/protoc /usr/local/bin/
 COPY --from=builder /go/bin/protoc-gen-go /usr/local/bin/
 RUN go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway
 RUN go get -u github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger
+RUN git clone https://github.com/gogo/protobuf /go/src/github.com/gogo/protobuf
 
-ENTRYPOINT ["/usr/local/bin/protoc", "-I/usr/local/include", "-I/go/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis"]
+ENTRYPOINT ["/usr/local/bin/protoc", "-I/usr/local/include", "-I/go/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis", "-I/go/src/github.com/gogo/protobuf"]
 CMD []
