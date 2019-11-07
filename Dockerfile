@@ -35,9 +35,9 @@ RUN git clone -b ${GRPC_GATEWAY_VERSION} --depth 1 https://github.com/grpc-ecosy
     go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-grpc-gateway && \
     go install github.com/grpc-ecosystem/grpc-gateway/protoc-gen-swagger && \
     git clone -b ${GOGO_PROTO_VERSION} --depth 1 https://github.com/gogo/protobuf /go/src/github.com/gogo/protobuf && \
-    git clone --depth 1 https://github.com/googleapis/googleapis /go/src/github.com/googleapis/googleapis && \
+    git clone https://github.com/googleapis/googleapis /go/src/github.com/googleapis/googleapis && \
     cd /go/src/github.com/googleapis/googleapis && \
-    git checkout ${GOOGLEAPI_VERSION}
+    git reset --hard ${GOOGLEAPI_VERSION}
 
 ENTRYPOINT ["/usr/local/bin/protoc", "-I/usr/local/include", "-I/go/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis", "-I/go/src/github.com/gogo/protobuf", "-I/go/src/github.com/googleapis/googleapis"]
 CMD []
