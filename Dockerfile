@@ -39,5 +39,9 @@ RUN git clone -b ${GRPC_GATEWAY_VERSION} --depth 1 https://github.com/grpc-ecosy
     cd /go/src/github.com/googleapis/googleapis && \
     git reset --hard ${GOOGLEAPI_VERSION}
 
-ENTRYPOINT ["/usr/local/bin/protoc", "-I/usr/local/include", "-I/go/src/github.com/grpc-ecosystem/grpc-gateway/third_party/googleapis", "-I/go/src/github.com/gogo/protobuf", "-I/go/src/github.com/googleapis/googleapis"]
+ENTRYPOINT ["/usr/local/bin/protoc", \
+            "-I/usr/local/include",  \
+            "-I/go/src/github.com/grpc-ecosystem/grpc-gateway", \
+            "-I/go/src/github.com/gogo/protobuf", \
+            "-I/go/src/github.com/googleapis/googleapis"]
 CMD []
